@@ -10,9 +10,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y python3-pip git zip unzip openjdk-17-jdk
+          pip3 install buildozer cython
 
       - name: Build APK
-        uses: ArtemGovorov/buildozer-action@v1
-        with:
-          command: buildozer android debug
+        run: buildozer android debug
