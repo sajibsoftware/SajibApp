@@ -1,3 +1,4 @@
+
 name: Build Android APK
 
 on:
@@ -10,9 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Buildozer
+        uses: ArtemGovorov/buildozer-action@v1.2
 
       - name: Build APK
-        uses: ArtemGovorov/buildozer-action@v1
-        with:
-          command: buildozer android debug
+        run: buildozer android debug
