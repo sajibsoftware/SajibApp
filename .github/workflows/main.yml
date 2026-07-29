@@ -19,6 +19,11 @@ jobs:
           sudo apt install -y python3-pip git zip unzip openjdk-17-jdk
           pip3 install buildozer cython
 
+      - name: Setup Android licenses
+        run: |
+          mkdir -p $HOME/.buildozer/android/platform/android-sdk/licenses
+          echo "24333f8a63e2d8c3b7d3c9f3a1e6b7a6c5d4e3f2" > $HOME/.buildozer/android/platform/android-sdk/licenses/android-sdk-license
+
       - name: Build APK
         run: |
           buildozer android debug
