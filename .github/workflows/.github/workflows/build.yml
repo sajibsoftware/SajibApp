@@ -1,5 +1,4 @@
-
-name: Build Android APK
+ name: Build Android APK
 
 on:
   push:
@@ -11,11 +10,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Buildozer
-        uses: ArtemGovorov/buildozer-action@v1.2
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y python3-pip git zip unzip openjdk-17-jdk
+          pip3 install buildozer cython
 
       - name: Build APK
         run: buildozer android debug
